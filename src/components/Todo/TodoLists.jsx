@@ -10,9 +10,9 @@ import { TodoItem } from './TodoItem';
 export function TodoLists() {
 	// const { todosFilter } = useTodo(); // #3
 
-	// const sharedObj = useContext(TodoContext);
-	// const todosFilter = sharedObj.todosFilter;
-	const { todosFilter } = useContext(TodoContext);
+	const sharedObj = useContext(TodoContext);
+	const todosFilter = sharedObj.todosFilter;
+	// const { todosFilter } = useContext(TodoContext);
 
 	return (
 		<ul className={styles.todoList}>

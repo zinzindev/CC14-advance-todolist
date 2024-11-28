@@ -23,6 +23,7 @@ export function TodoForm({ textConfirm, onSetShow, oldTodo }) {
 	// const sharedObj = useContext(TodoContext);
 	// const addTodo = sharedObj.addTodo;
 	const { addTodo } = useContext(TodoContext);
+	const { editTodo } = useContext(TodoContext);
 
 	// State
 	const [task, setTask] = useState(oldTodo?.task || '');
@@ -59,7 +60,7 @@ export function TodoForm({ textConfirm, onSetShow, oldTodo }) {
 			onSetShow(false);
 		} else if (validTask && oldTodo) {
 			// console.log(oldTodo.id)
-			// editTodo(oldTodo.id, { ...oldTodo, task });
+			editTodo(oldTodo.id, { ...oldTodo, task });
 			onSetShow(false);
 		}
 	};

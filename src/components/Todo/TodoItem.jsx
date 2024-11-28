@@ -1,13 +1,28 @@
+import { useState, useContext } from 'react';
+
+import { TodoContext } from '../../contexts/TodoContext';
+
 import styles from './TodoItem.module.scss';
-import { useState } from 'react';
-import { useTodo } from '../../hooks/useTodo';
+
+// import { useTodo } from '../../hooks/useTodo';
 import { TodoForm } from './TodoForm';
 import { HiCheck, HiPencil, HiTrash } from 'react-icons/hi';
 import { convertDate } from '../../utils/DateUtils';
 
+// let count = 0;
+
 export function TodoItem({ todo }) {
+	// console.log('todo: ', todo);
+	// count += 1;
+	// console.log('count: ', count);
+	// console.log('----------------------------------------------------------------');
+
 	// ** Consume
-	const { editTodo, deleteTodo } = useTodo(); //#3
+	// const { editTodo, deleteTodo } = useTodo(); //#3
+	const sharedObj = useContext(TodoContext);
+	const editTodo = sharedObj.editTodo;
+	const deleteTodo = sharedObj.deleteTodo;
+
 	// state
 	const [isEdit, setIsEdit] = useState(false);
 
@@ -15,6 +30,7 @@ export function TodoItem({ todo }) {
 
 	const handleClickCheckBox = () => {
 		editTodo(todo.id, { ...todo, status: !todo.status }); // **
+		console.log('todo: ', todo);
 	};
 
 	const handleClickDeleteBox = () => {
