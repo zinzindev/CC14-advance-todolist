@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import * as TodoAPIServices from '../services/todoServices';
+import { getSevenDayRange } from '../utils/DateUtils';
 
 // สร้าง
 // Create Context => Context Object(NAME)
@@ -108,6 +109,28 @@ function TodoContextProvider(props) {
 		}
 	};
 
+	// FILTER BY LISTS
+	const selectList = (selectedIndex) => {
+		const [today, nextSevenDay] = getSevenDayRange();
+		if (selectedIndex === 0) {
+			setTodosFilter(todos);
+		} else if (selectedIndex === 1) {
+			const newTodo = todos.filter((todo) => todo.date === today);
+			setTodosFilter(newTodo);
+		} else if (selectedIndex === 2) {
+			const newTodo = todos.filter((todo) => todo.date >= today && todo.date <= nextSevenDay);
+			setTodosFilter(newTodo);
+		}
+	};
+
+	// SEARCH TODO
+	const searchTodo = (searchValue) => {
+		const newTodo = todos.filter((todo) =>
+			todo.task.toLowerCase().includes(searchValue.toLowerCase())
+		);
+		setTodosFilter(newTodo);
+	};
+
 	const sharedObj = {
 		magic: 9,
 		todos: todos,
@@ -115,6 +138,8 @@ function TodoContextProvider(props) {
 		addTodo: addTodo,
 		editTodo: editTodo,
 		deleteTodo: deleteTodo,
+		selectList: selectList,
+		searchTodo: searchTodo,
 	}; // ต้อง share เป็น object
 	// retrun jsx
 	return <TodoContext.Provider value={sharedObj}>{props.children}</TodoContext.Provider>;
