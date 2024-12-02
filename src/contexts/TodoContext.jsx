@@ -141,7 +141,7 @@ function TodoContextProvider(props) {
 	// selectList: selectList,
 	// searchTodo: searchTodo,
 
-	// short hand
+	// SHORT HAND
 	// todos,
 	// todosFilter,
 	// addTodo,
