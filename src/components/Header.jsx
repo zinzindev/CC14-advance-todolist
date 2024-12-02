@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import { FaHome, FaSearch } from 'react-icons/fa';
+import { useState } from 'react';
+
 // import Avatar  from '@mui/material/Avatar';
 import { Avatar } from '@mui/material';
 import UserPhoto from '../assets/user.jpeg';

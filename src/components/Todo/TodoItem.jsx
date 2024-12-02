@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState, useContext } from 'react'; //#1
 
-import { TodoContext } from '../../contexts/TodoContext';
+import { TodoContext } from '../../contexts/TodoContext'; //#2
 
 import styles from './TodoItem.module.scss';
 
@@ -18,10 +18,12 @@ export function TodoItem({ todo }) {
 	// console.log('----------------------------------------------------------------');
 
 	// ** Consume
-	// const { editTodo, deleteTodo } = useTodo(); //#3
-	const sharedObj = useContext(TodoContext);
-	const editTodo = sharedObj.editTodo;
-	const deleteTodo = sharedObj.deleteTodo;
+	// const { editTodo, deleteTodo } = useTodo();
+	// const sharedObj = useContext(TodoContext); //#3
+	// const editTodo = sharedObj.editTodo; //#4
+	// const deleteTodo = sharedObj.deleteTodo; //#5
+
+	const { editTodo, deleteTodo } = useContext(TodoContext);
 
 	// state
 	const [isEdit, setIsEdit] = useState(false);
