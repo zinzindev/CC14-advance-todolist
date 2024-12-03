@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react'; //#1
-
-import { TodoContext } from '../../contexts/TodoContext'; //#2
+// import { useState, useContext } from 'react'; //#1
+import { useState } from 'react'; //#1
 
 import styles from './TodoItem.module.scss';
 
-// import { useTodo } from '../../hooks/useTodo';
+// import { TodoContext } from '../../contexts/TodoContext'; //#2
+import { useTodo } from '../../hooks/useTodo';
 import { TodoForm } from './TodoForm';
 import { HiCheck, HiPencil, HiTrash } from 'react-icons/hi';
 import { convertDate } from '../../utils/DateUtils';
@@ -23,7 +23,8 @@ export function TodoItem({ todo }) {
 	// const editTodo = sharedObj.editTodo; //#4
 	// const deleteTodo = sharedObj.deleteTodo; //#5
 
-	const { editTodo, deleteTodo } = useContext(TodoContext);
+	// const { editTodo, deleteTodo } = useContext(TodoContext);
+	const { editTodo, deleteTodo } = useTodo();
 
 	// state
 	const [isEdit, setIsEdit] = useState(false);
