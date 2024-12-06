@@ -1,6 +1,9 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useReducer } from 'react';
 import * as TodoAPIServices from '../services/todoServices';
 import { getSevenDayRange } from '../utils/DateUtils';
+import todoReducer from '../reducer/todoReducer';
+import { INIT_TODO } from '../reducer/todoReducer';
+import { FETCH_TODO } from '../reducer/todoReducer';
 
 // สร้าง
 // Create Context => Context Object(NAME)
@@ -17,6 +20,17 @@ function TodoContextProvider(props) {
 	const [todos, setTodos] = useState([]);
 	const [todosFilter, setTodosFilter] = useState([]);
 
+	// USE_REDUCER: ครูตุดตู่กับตรูเต้คุยกันรู้เรื่อง
+	// Param1: ใครเป็นคนสรุป -> ครูเต้ == todoReducer
+	// Param2: state ตั้งต้น?
+	// const [state, dispatch] = useReducer(todoReducer, INIT_TODO);
+	const [allTodoList, dispatch] = useReducer(todoReducer, INIT_TODO);
+	// Return1: arr[0]: State(init, update)
+	// Return2: arr[1] dispatch Functin: สมุดใบสั่ง
+	// console.log('allTodoList: ', allTodoList);
+	console.log('STATE: ', allTodoList);
+	// console.log('dispatch: ', dispatch);
+
 	// GET : fetch
 	async function fetchAllTodos() {
 		try {
@@ -24,8 +38,13 @@ function TodoContextProvider(props) {
 			const response = await TodoAPIServices.getAllTodos();
 
 			// #2 : Sync with Internal State
-			setTodos(response.data.todos);
-			setTodosFilter(response.data.todos);
+			// setTodos(response.data.todos);
+			// setTodosFilter(response.data.todos);
+
+			// #2-Alternative: ออกใบสั่ง
+			// let dispatchObj = { type: FETCH_TODO, payload: { todos: response.data.todos } };
+			// dispatch(dispatchObj);
+			dispatch({ type: FETCH_TODO, payload: { todos: response.data.todos } });
 		} catch (error) {
 			// #3 Error Handler
 			console.log(error.response.status);
@@ -155,7 +174,15 @@ function TodoContextProvider(props) {
 	// return <TodoContext.Provider value={sharedObj}>{props.children}</TodoContext.Provider>;
 	return (
 		<TodoContext.Provider
-			value={{ todos, todosFilter, addTodo, editTodo, deleteTodo, selectList, searchTodo }}
+			value={{
+				todos: allTodoList.todos,
+				todosFilter: allTodoList.todosFilter,
+				addTodo,
+				editTodo,
+				deleteTodo,
+				selectList,
+				searchTodo,
+			}}
 		>
 			{props.children}
 		</TodoContext.Provider>
