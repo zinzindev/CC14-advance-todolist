@@ -1,5 +1,6 @@
 // action.type: ประเภทความผิด
 export const FETCH_TODO = 'FETCH_TODO';
+export const ADD_TODO = 'ADD_TODO';
 
 // init state: คะแนนตั้งต้น
 export const INIT_TODO = {
@@ -15,6 +16,9 @@ function todoReducer(state, action) {
 		case FETCH_TODO:
 			// do something and return new state
 			return { todos: action.payload.todos, todosFilter: action.payload.todos };
+		case ADD_TODO:
+			const newTodoList = [action.payload.newTodo, ...state.todos];
+			return { todos: newTodoList, todosFilter: newTodoList };
 
 		default:
 			return state;
