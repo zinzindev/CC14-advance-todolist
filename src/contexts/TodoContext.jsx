@@ -3,7 +3,7 @@ import * as TodoAPIServices from '../services/todoServices';
 import { getSevenDayRange } from '../utils/DateUtils';
 import todoReducer from '../reducer/todoReducer';
 import { INIT_TODO } from '../reducer/todoReducer';
-import { FETCH_TODO, ADD_TODO } from '../reducer/todoReducer';
+import { FETCH_TODO, ADD_TODO, EDIT_TODO, DELETE_TODO } from '../reducer/todoReducer';
 
 // สร้าง
 // Create Context => Context Object(NAME)
@@ -44,7 +44,10 @@ function TodoContextProvider(props) {
 			// #2-Alternative: ออกใบสั่ง
 			// let dispatchObj = { type: FETCH_TODO, payload: { todos: response.data.todos } };
 			// dispatch(dispatchObj);
-			dispatch({ type: FETCH_TODO, payload: { todos: response.data.todos } });
+			dispatch({
+				type: FETCH_TODO,
+				payload: { todos: response.data.todos },
+			});
 		} catch (error) {
 			// #3 Error Handler
 			console.log(error.response.status);
@@ -71,7 +74,11 @@ function TodoContextProvider(props) {
 			// NOTE : not concern about time yet! todo for today can appear in next 7 days lists
 			// setTodos(newTodoLists);
 			// setTodosFilter(newTodoLists);
-			dispatch({ type: ADD_TODO, payload: { newTodo: response.data.todo } });
+
+			dispatch({
+				type: ADD_TODO,
+				payload: { newTodo: response.data.todo },
+			});
 		} catch (error) {
 			// #3 Error Handler eg. modal Error, Sweat Alert
 			console.log(error.response.data);
@@ -88,21 +95,26 @@ function TodoContextProvider(props) {
 			// #1 Sync With External State/Service : Database
 			// const response = await axios.put(`http://localhost:8080/todos/${todoId}`, updateObj);
 			const response = await TodoAPIServices.updateTodo(updateObj);
-			const updatedTodoObj = response.data.todo;
+			// const updatedTodoObj = response.data.todo;
 
 			// #2  Sync with Internal State : UI State
-			const foundedIndex = todos.findIndex((todo) => todo.id === todoId);
-			if (foundedIndex !== -1) {
-				const newTodoLists = [...todos];
-				// newTodoLists[foundedIndex] = { ...newTodoLists[foundedIndex], ...updatedTodoObj };
-				newTodoLists[foundedIndex] = Object.assign(
-					{},
-					newTodoLists[foundedIndex],
-					updatedTodoObj
-				);
-				setTodos(newTodoLists);
-				setTodosFilter(newTodoLists);
-			}
+			// const foundedIndex = todos.findIndex((todo) => todo.id === todoId);
+			// if (foundedIndex !== -1) {
+			// 	const newTodoLists = [...todos];
+			// 	// newTodoLists[foundedIndex] = { ...newTodoLists[foundedIndex], ...updatedTodoObj };
+			// 	newTodoLists[foundedIndex] = Object.assign(
+			// 		{},
+			// 		newTodoLists[foundedIndex],
+			// 		updatedTodoObj
+			// 	);
+			// 	setTodos(newTodoLists);
+			// 	setTodosFilter(newTodoLists);
+			// }
+
+			dispatch({
+				type: EDIT_TODO,
+				payload: { id: todoId, updatedTodo: response.data.todo },
+			});
 		} catch (error) {
 			// #3 Error Handler eg. modal Error, Sweat Alert
 			console.log(error.response.data);
@@ -120,9 +132,14 @@ function TodoContextProvider(props) {
 			await TodoAPIServices.deleteTodo(todoId);
 
 			// #2 Sync with Internal State : UI State
-			const newTodoLists = todos.filter((todo) => todo.id !== todoId);
-			setTodos(newTodoLists);
-			setTodosFilter(newTodoLists);
+			// const newTodoLists = todos.filter((todo) => todo.id !== todoId);
+			// setTodos(newTodoLists);
+			// setTodosFilter(newTodoLists);
+
+			dispatch({
+				type: DELETE_TODO,
+				payload: { id: todoId },
+			});
 		} catch (error) {
 			// #3 Error Handler eg. modal Error, Sweat Alert
 			console.log(error.response.data);
