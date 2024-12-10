@@ -3,7 +3,14 @@ import * as TodoAPIServices from '../services/todoServices';
 import { getSevenDayRange } from '../utils/DateUtils';
 import todoReducer from '../reducer/todoReducer';
 import { INIT_TODO } from '../reducer/todoReducer';
-import { FETCH_TODO, ADD_TODO, EDIT_TODO, DELETE_TODO } from '../reducer/todoReducer';
+import {
+	FETCH_TODO,
+	ADD_TODO,
+	EDIT_TODO,
+	DELETE_TODO,
+	SEARCH_TODO,
+	SELECT_TODO_LIST,
+} from '../reducer/todoReducer';
 
 // สร้าง
 // Create Context => Context Object(NAME)
@@ -148,24 +155,32 @@ function TodoContextProvider(props) {
 
 	// FILTER BY LISTS
 	const selectList = (selectedIndex) => {
+		console.log('selectedIndex: ', selectedIndex);
 		const [today, nextSevenDay] = getSevenDayRange();
-		if (selectedIndex === 0) {
-			setTodosFilter(todos);
-		} else if (selectedIndex === 1) {
-			const newTodo = todos.filter((todo) => todo.date === today);
-			setTodosFilter(newTodo);
-		} else if (selectedIndex === 2) {
-			const newTodo = todos.filter((todo) => todo.date >= today && todo.date <= nextSevenDay);
-			setTodosFilter(newTodo);
-		}
+		// if (selectedIndex === 0) {
+		// 	setTodosFilter(todos);
+		// } else if (selectedIndex === 1) {
+		// 	const newTodo = todos.filter((todo) => todo.date === today);
+		// 	setTodosFilter(newTodo);
+		// } else if (selectedIndex === 2) {
+		// 	const newTodo = todos.filter((todo) => todo.date >= today && todo.date <= nextSevenDay);
+		// 	setTodosFilter(newTodo);
+		// }
+
+		dispatch({ type: SELECT_TODO_LIST, payload: { selectedIndex } });
 	};
 
 	// SEARCH TODO
 	const searchTodo = (searchValue) => {
-		const newTodo = todos.filter((todo) =>
-			todo.task.toLowerCase().includes(searchValue.toLowerCase())
-		);
-		setTodosFilter(newTodo);
+		// const newTodo = todos.fi lter((todo) =>
+		// 	todo.task.toLowerCase().includes(searchValue.toLowerCase())
+		// );
+		// setTodosFilter(newTodo);
+
+		dispatch({
+			type: SEARCH_TODO,
+			payload: { searchText: searchValue },
+		});
 	};
 
 	// const sharedObj = {
