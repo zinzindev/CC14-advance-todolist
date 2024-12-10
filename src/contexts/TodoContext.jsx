@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useReducer } from 'react';
 import * as TodoAPIServices from '../services/todoServices';
-import { getSevenDayRange } from '../utils/DateUtils';
+// import { getSevenDayRange } from '../utils/DateUtils';
 import todoReducer from '../reducer/todoReducer';
 import { INIT_TODO } from '../reducer/todoReducer';
 import {
@@ -24,8 +24,8 @@ export const TodoContext = createContext();
 function TodoContextProvider(props) {
 	// console.log('props.chidren: ', props.children);
 
-	const [todos, setTodos] = useState([]);
-	const [todosFilter, setTodosFilter] = useState([]);
+	// const [todos, setTodos] = useState([]);
+	// const [todosFilter, setTodosFilter] = useState([]);
 
 	// USE_REDUCER: ครูตุดตู่กับตรูเต้คุยกันรู้เรื่อง
 	// Param1: ใครเป็นคนสรุป -> ครูเต้ == todoReducer
@@ -156,7 +156,7 @@ function TodoContextProvider(props) {
 	// FILTER BY LISTS
 	const selectList = (selectedIndex) => {
 		console.log('selectedIndex: ', selectedIndex);
-		const [today, nextSevenDay] = getSevenDayRange();
+		// const [today, nextSevenDay] = getSevenDayRange();
 		// if (selectedIndex === 0) {
 		// 	setTodosFilter(todos);
 		// } else if (selectedIndex === 1) {
