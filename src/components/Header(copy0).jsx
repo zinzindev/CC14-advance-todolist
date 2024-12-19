@@ -6,7 +6,6 @@ import { Avatar } from '@mui/material';
 import UserPhoto from '../assets/user.jpeg';
 import { useTodo } from '../hooks/useTodo';
 import { Link } from 'react-router-dom';
-import { red } from '@mui/material/colors';
 
 // Function Component
 export function Header() {
@@ -28,7 +27,7 @@ export function Header() {
 			{/* App Name */}
 			<h1>Todoist-Pavit</h1>
 
-			{/* Search Bar */}
+			{/* Search bar */}
 			<div className='header__search__container'>
 				<span className='header__search__icon'>
 					<FaSearch />
@@ -41,14 +40,15 @@ export function Header() {
 					value={searchValue}
 				/>
 			</div>
-
 			{/* Avatar */}
 			<div>
-				<Avatar
-					alt='user-profile'
-					src={UserPhoto}
-					sx={{ width: 40, height: 40, cursor: 'pointer' }}
-				/>
+				<Link to='/profile'>
+					<Avatar
+						src={UserPhoto}
+						alt='user-profile'
+						sx={{ width: 40, height: 40, cursor: 'pointer' }}
+					/>
+				</Link>
 			</div>
 		</header>
 	);
