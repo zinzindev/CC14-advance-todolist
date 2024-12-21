@@ -10,10 +10,10 @@ function App() {
 	// let isLogin  = true;
 	// const { user, isAuth } = useAuth();
 
-	return <TodoPage />;
+	// return <TodoPage />;
 	// return <LoginPage />;
 	// return <RegisterPage />;
-	// return <ProfilePage />;
+	return <ProfilePage />;
 }
 
 export default App;
