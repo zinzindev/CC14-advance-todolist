@@ -2,18 +2,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { publicRoutes } from './publicRoutes';
 import { privateRoutes } from './privateRoutes';
 
-function Routes({isAuthenticate = false}) {
+function Routes({ isAuthenticate = false }) {
+	let appRoutes = isAuthenticate ? privateRoutes : publicRoutes;
+	const router = createBrowserRouter(appRoutes);
 
-    let appRoutes = isAuthenticate ? privateRoutes : publicRoutes
-    const router = createBrowserRouter(appRoutes);
-
-    return <RouterProvider router={router} />;
+	return <RouterProvider router={router} />;
 }
 
+// const mockedRotes = [
 export default Routes;
 
-// Ex : Array of Router Object 
-// const mockedRotes = [
+// Ex : Array of Router Object
 //     {
 //         path: '/',
 //         element: <h1>Home</h1>,

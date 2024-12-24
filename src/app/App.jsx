@@ -1,11 +1,11 @@
 import './App.scss';
-// import Router from '../routes/Router';
 // import { useAuth } from '../hooks/useAuth';
 import TodoPage from '../pages/TodoPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProfilePage from '../pages/ProfilePage';
 import { Spinner } from '../components/Common/Spinner';
+import Router from '../routes/Router';
 
 function App() {
 	// let isLogin  = true;
@@ -15,7 +15,9 @@ function App() {
 	// return <LoginPage />;
 	// return <RegisterPage />;
 	// return <ProfilePage />;
-	return <Spinner />;
+	// return <Spinner />;
+
+	return <Router />;
 }
 
 export default App;
