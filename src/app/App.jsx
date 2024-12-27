@@ -6,9 +6,11 @@ import './App.scss';
 // import ProfilePage from '../pages/ProfilePage';
 // import { Spinner } from '../components/Common/Spinner';
 import Router from '../routes/Router';
+import { useAuth } from '../hooks/useAuth';
 
 function App() {
-	let isLogin = true;
+	// let isLogin = true;
+	const { user, isAuth } = useAuth();
 
 	// return <TodoPage />;
 	// return <LoginPage />;
@@ -16,7 +18,8 @@ function App() {
 	// return <ProfilePage />;
 	// return <Spinner />;
 
-	return <Router isAuthenticate={isLogin} />;
+	// return <Router isAuthenticate={isLogin} />;
+	return <Router isAuthenticate={isAuth} />;
 }
 
 export default App;

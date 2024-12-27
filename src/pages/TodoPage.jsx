@@ -7,7 +7,6 @@ import TodoContextProvider from '../contexts/TodoContext';
 
 function TodoPage() {
 	return (
-		// <BrowserRouter>
 		<TodoContextProvider>
 			<div className='container'>
 				<Header />
@@ -15,7 +14,6 @@ function TodoPage() {
 				<TodoContent />
 			</div>
 		</TodoContextProvider>
-		// </BrowserRouter>
 	);
 }
 

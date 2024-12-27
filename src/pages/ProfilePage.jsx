@@ -4,6 +4,7 @@ import { MenuAppBar as AppBar } from '../components/Common/AppBar';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { UserAvatar } from '../components/Common/UserAvatar';
 import { Input } from '../components/Common/Input';
+import { Link } from 'react-router-dom';
 class ProfilePage extends Component {
 	render() {
 		return (
@@ -56,26 +57,30 @@ class ProfilePage extends Component {
 							<Input name='date' type='date' error={false} />
 						</Grid>
 						<Grid item xs={6}>
-							<Button
-								fullWidth={true}
-								variant='contained'
-								sx={{ background: '#db4c3f', padding: 2 }}
-							>
-								<Typography variant='h5' component='span'>
-									Edit Profile
-								</Typography>
-							</Button>
+							<Link to='/todo'>
+								<Button
+									fullWidth={true}
+									variant='contained'
+									sx={{ background: '#db4c3f', padding: 2 }}
+								>
+									<Typography variant='h5' component='span'>
+										Edit Profile
+									</Typography>
+								</Button>
+							</Link>
 						</Grid>
 						<Grid item xs={6}>
-							<Button
-								fullWidth={true}
-								variant='contained'
-								sx={{ backgroundColor: '#aaa', padding: 2 }}
-							>
-								<Typography variant='h5' component='span'>
-									Cancel
-								</Typography>
-							</Button>
+							<Link to='/todo'>
+								<Button
+									fullWidth={true}
+									variant='contained'
+									sx={{ backgroundColor: '#aaa', padding: 2 }}
+								>
+									<Typography variant='h5' component='span'>
+										Cancel
+									</Typography>
+								</Button>
+							</Link>
 						</Grid>
 						<Grid item xs={12}>
 							BTN-Logout

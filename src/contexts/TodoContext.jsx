@@ -153,6 +153,7 @@ function TodoContextProvider(props) {
 
 	// Retrun JSX
 	// return <TodoContext.Provider value={sharedObj}>{props.children}</TodoContext.Provider>;
+
 	return (
 		<TodoContext.Provider
 			value={{ todos, todosFilter, addTodo, editTodo, deleteTodo, selectList, searchTodo }}
